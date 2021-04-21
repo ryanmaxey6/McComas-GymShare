@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements MusclesFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements MusclesFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

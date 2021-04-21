@@ -24,8 +24,6 @@ public class MusclesActivity extends AppCompatActivity {
         muscleGroup.setText(content);
 
         back = (Button) findViewById(R.id.buttonReturn);
-
-
     }
 
     public void onClickBack(View view){

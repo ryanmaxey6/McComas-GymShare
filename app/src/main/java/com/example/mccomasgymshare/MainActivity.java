@@ -5,23 +5,39 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
+
+public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
+    HomeFragment frag;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Map<String, String> user = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        frag = new HomeFragment();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         // Displays the home fragment when the app is started
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
+                frag).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -32,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
                     switch (item.getItemId()) {
                         case R.id.nav_home:
-                            selectedFragment = new HomeFragment();
+                            selectedFragment = frag;
                             break;
                         case R.id.nav_workout:
                             selectedFragment = new WorkoutsFragment();
@@ -51,4 +67,65 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+    @Override
+    public void onButtonClicked(int infoID) {
+        if(infoID == 0)
+        {
+            frag.setScreen();
+        }
+        else if(infoID == 1)
+        {
+            String username = frag.getUsername();
+            String password = frag.getPassword();
+
+            frag.resetScreen();
+            user.put(username, password);
+            db.collection("users")
+                    .add(user)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                                Log.d("Hey","Document: " + documentReference.getId());
+                        }
+                    })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("Fail","Error: " + e);
+                        }
+                    });
+
+        }
+        else if (infoID == 2)
+        {
+            frag.resetScreen();
+        }
+        else if (infoID == 3)
+        {
+            db.collection("users")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful())
+                            {
+                                for (QueryDocumentSnapshot document : task.getResult())
+                                {
+                                    if (document.contains(frag.getUsername()))
+                                    {
+                                        if (document.get(frag.getUsername()).equals(frag.getPassword()))
+                                        {
+                                            int duration = Toast.LENGTH_LONG;
+                                            Toast.makeText(getApplicationContext(), "Welcome " + frag.getUsername(), duration);
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+        }
+    }
 }

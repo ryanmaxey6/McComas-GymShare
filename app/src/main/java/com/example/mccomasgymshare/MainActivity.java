@@ -22,7 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, MusclesFragment.OnFragmentInteractionListener {
     HomeFragment frag;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Map<String, String> user = new HashMap<>();
@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 frag).commit();
     }
-
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -128,6 +126,41 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                             }
                         }
                     });
+        }
+    }
+
+
+    @Override
+    public void onButtonClickedMuscle(int infoID) {
+        if (infoID == 0) {
+            Intent i1 = new Intent(this, MusclesActivity.class);
+            i1.putExtra("muscleGroup", "Back/Shoulder");
+            i1.putExtra("muscle", 0);
+            startActivity(i1);
+
+        } else if (infoID == 1) {
+            Intent i1 = new Intent(this, MusclesActivity.class);
+            i1.putExtra("muscleGroup", "Arms");
+            i1.putExtra("muscle", 1);
+            startActivity(i1);
+
+        } else if (infoID == 2) {
+            Intent i1 = new Intent(this, MusclesActivity.class);
+            i1.putExtra("muscleGroup", "Chest");
+            i1.putExtra("muscle", 2);
+            startActivity(i1);
+
+        } else if (infoID == 3) {
+            Intent i1 = new Intent(this, MusclesActivity.class);
+            i1.putExtra("muscleGroup", "Abs");
+            i1.putExtra("muscle", 3);
+            startActivity(i1);
+
+        } else if (infoID == 4) {
+            Intent i1 = new Intent(this, MusclesActivity.class);
+            i1.putExtra("muscleGroup", "Legs");
+            i1.putExtra("muscle", 4);
+            startActivity(i1);
         }
     }
 }

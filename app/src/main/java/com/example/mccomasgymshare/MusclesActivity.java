@@ -32,6 +32,7 @@ public class MusclesActivity extends AppCompatActivity {
         muscleGroup.setText(content);
 
         back = (Button) findViewById(R.id.buttonReturn);
+        muscleFragment
         muscleArrays = new MuscleArrays();
 
         recyclerView = findViewById(R.id.rvMuscles);
@@ -67,6 +68,7 @@ public class MusclesActivity extends AppCompatActivity {
 
         }
         recyclerView.setAdapter(adapter);
+
 
 
 

@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,32 +18,46 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
-    HomeFragment frag;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    Map<String, String> user = new HashMap<>();
+    HomeFragment frag = new HomeFragment();
 
+    public static final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Map<String, String> user = new HashMap<>();
+    int check = 0;
+    boolean checker = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frag = new HomeFragment();
+        //frag = new HomeFragment();
+
+
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         // Displays the home fragment when the app is started
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 frag).commit();
+
+        if (getIntent().getExtras() != null)
+        {
+
+            String s = getIntent().getStringExtra("User");
+            frag.loginSuccess(s);
+        }
     }
-
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
             String username = frag.getUsername();
             String password = frag.getPassword();
 
+            Toast toast = Toast.makeText(getApplicationContext(), "Account Successfully created!" , Toast.LENGTH_LONG);
+            toast.show();
+
             frag.resetScreen();
             user.put(username, password);
             db.collection("users")
@@ -88,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                                Log.d("Hey","Document: " + documentReference.getId());
+                            Log.d("Hey","Document: " + documentReference.getId());
                         }
                     })
 
@@ -102,32 +122,11 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         }
         else if (infoID == 2)
         {
-            frag.resetScreen();
+            checker = true;
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            //frag.setScreen();
         }
-        else if (infoID == 3)
-        {
-            db.collection("users")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful())
-                            {
-                                for (QueryDocumentSnapshot document : task.getResult())
-                                {
-                                    if (document.contains(frag.getUsername()))
-                                    {
-                                        if (document.get(frag.getUsername()).equals(frag.getPassword()))
-                                        {
-                                            int duration = Toast.LENGTH_LONG;
-                                            Toast.makeText(getApplicationContext(), "Welcome " + frag.getUsername(), duration);
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-        }
+        
     }
 }

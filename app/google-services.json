@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "333781327010",
+    "project_id": "mccomas-gymshare",
+    "storage_bucket": "mccomas-gymshare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333781327010:android:8c9e51424a8119200e4bfb",
+        "android_client_info": {
+          "package_name": "com.example.mccomasgymshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333781327010-v4tdqu2eaqce65oshgjjkq2qknuv3cgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHuJPe5pjP6SP82J_sopFZ8tUngRP-5D4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333781327010-v4tdqu2eaqce65oshgjjkq2qknuv3cgb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

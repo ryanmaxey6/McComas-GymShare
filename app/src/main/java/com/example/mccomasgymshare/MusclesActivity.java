@@ -40,28 +40,28 @@ public class MusclesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         int temp = b1.getInt("muscle");
-        Log.i("Muscle", temp+"");
-        Log.i("Muscle Group", b1.getString("muscleGroup"));
+        //Log.i("Muscle", temp+"");
+        //Log.i("Muscle Group", b1.getString("muscleGroup"));
 
         switch(temp){
             case 0:
-                Log.i("Back", "here");
+                //Log.i("Back", "here");
                 adapter = new MuscleGroupAdapter(muscleArrays.getBack(), muscleArrays.getBackText());
                 break;
             case 1:
-                Log.i("arms", "here");
+                //Log.i("arms", "here");
                 adapter = new MuscleGroupAdapter(muscleArrays.getArms(), muscleArrays.getArmsText());
                 break;
             case 2:
-                Log.i("chest", "here");
+                //Log.i("chest", "here");
                 adapter = new MuscleGroupAdapter(muscleArrays.getChest(), muscleArrays.getChestText());
                 break;
             case 3:
-                Log.i("abs", "here");
+                //Log.i("abs", "here");
                 adapter = new MuscleGroupAdapter(muscleArrays.getAbs(), muscleArrays.getAbsText());
                 break;
             case 4:
-                Log.i("legs", "here");
+                //Log.i("legs", "here");
                 adapter = new MuscleGroupAdapter(muscleArrays.getLegs(), muscleArrays.getLegsText());
                 break;
 

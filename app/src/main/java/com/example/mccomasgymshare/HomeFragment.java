@@ -25,10 +25,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Button login, finishCreate, create, loginAttempt;
     private OnFragmentInteractionListener mListener;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_home, container, false);
         login = view.findViewById(R.id.login);
         finishCreate = view.findViewById(R.id.createFinish);
@@ -47,7 +47,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //username.setOnClickListener(this);
         //password.setOnClickListener(this);
 
-
         return view;
     }
 
@@ -62,6 +61,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
 
     public String getUsername()
     {
@@ -150,7 +150,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     {
         return false;
     }
-
 
     public interface OnFragmentInteractionListener{
         void onButtonClicked(int infoID);

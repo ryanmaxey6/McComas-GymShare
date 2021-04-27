@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "333781327010",
-    "project_id": "mccomas-gymshare",
-    "storage_bucket": "mccomas-gymshare.appspot.com"
+    "project_number": "60925310177",
+    "project_id": "mccomas-gymshare-b9913",
+    "storage_bucket": "mccomas-gymshare-b9913.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:333781327010:android:8c9e51424a8119200e4bfb",
+        "mobilesdk_app_id": "1:60925310177:android:f0d0230bde1466d16473a0",
         "android_client_info": {
           "package_name": "com.example.mccomasgymshare"
         }
       },
       "oauth_client": [
         {
-          "client_id": "333781327010-v4tdqu2eaqce65oshgjjkq2qknuv3cgb.apps.googleusercontent.com",
+          "client_id": "60925310177-f3ligup1qu4603mkgc0pcevgp9f5cu30.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBHuJPe5pjP6SP82J_sopFZ8tUngRP-5D4"
+          "current_key": "AIzaSyDOucMtLFvSY2dabYMpBXlfaL0qxG6VwJw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "333781327010-v4tdqu2eaqce65oshgjjkq2qknuv3cgb.apps.googleusercontent.com",
+              "client_id": "60925310177-f3ligup1qu4603mkgc0pcevgp9f5cu30.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

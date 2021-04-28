@@ -23,7 +23,6 @@ public class MusclesFragment extends Fragment implements View.OnClickListener {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_muscles, container, false);
@@ -71,25 +70,25 @@ public class MusclesFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId() == back.getId()){
-            mListener.onButtonClicked(0);
+            mListener.onButtonClickedMuscle(0);
         }
         else if(view.getId() == arms.getId()){
-            mListener.onButtonClicked(1);
+            mListener.onButtonClickedMuscle(1);
         }
         else if(view.getId() == chest.getId()){
-            mListener.onButtonClicked(2);
+            mListener.onButtonClickedMuscle(2);
         }
         else if(view.getId() == abs.getId()){
-            mListener.onButtonClicked(3);
+            mListener.onButtonClickedMuscle(3);
         }
         else if(view.getId() == legs.getId()){
-            mListener.onButtonClicked(4);
+            mListener.onButtonClickedMuscle(4);
         }
     }
 
 
 
     public interface OnFragmentInteractionListener{
-        void onButtonClicked(int infoID);
+        void onButtonClickedMuscle(int infoID);
     }
 }

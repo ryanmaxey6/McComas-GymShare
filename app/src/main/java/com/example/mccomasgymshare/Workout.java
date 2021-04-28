@@ -2,18 +2,18 @@ package com.example.mccomasgymshare;
 
 public class Workout {
 
-    int id;
     String title;
     String description;
+    String duration;
 
-    public Workout(int id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
+    public Workout() {
+
     }
 
-    public int getId() {
-        return id;
+    public Workout(String title, String description, String duration) {
+        this.title = title;
+        this.description = description;
+        this.duration = duration;
     }
 
     public String getTitle() {
@@ -24,12 +24,28 @@ public class Workout {
         return description;
     }
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
     @Override
     public String toString() {
         return "Workout{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", duration='" + duration + '\'' +
                 '}';
     }
 }

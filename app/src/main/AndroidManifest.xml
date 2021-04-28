@@ -11,7 +11,8 @@
         android:theme="@style/Theme.McComasGymShare">
         <activity android:name=".DisplayActivity"
             android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".MusclesActivity" />
+        <activity android:name=".MusclesActivity"
+            android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

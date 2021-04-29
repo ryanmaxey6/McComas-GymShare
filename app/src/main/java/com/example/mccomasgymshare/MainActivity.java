@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
             String username = frag.getUsername();
             String password = frag.getPassword();
 
+            Toast toast = Toast.makeText(getApplicationContext(), "Account Successfully created!" , Toast.LENGTH_LONG);
+            toast.show();
+
             frag.resetScreen();
             user.put(username, password);
             db.collection("users")
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                                Log.d("Hey","Document: " + documentReference.getId());
+                            Log.d("Hey","Document: " + documentReference.getId());
                         }
                     })
 
@@ -107,7 +110,11 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         }
         else if (infoID == 2)
         {
-            frag.resetScreen();
+            checker = true;
+
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivityForResult(intent, 1);
+            //frag.setScreen();
         }
         else if (infoID == 3)
         {
@@ -124,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                                     {
                                         if (document.get(frag.getUsername()).equals(frag.getPassword()))
                                         {
+                                            Log.v("Success", "Signed in");
                                             int duration = Toast.LENGTH_LONG;
                                             Toast.makeText(getApplicationContext(), "Welcome " + frag.getUsername(), duration);
 

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,33 +20,36 @@ import androidx.fragment.app.Fragment;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     TextView text;
+
+    TextView text4, text5;
     EditText username;
     EditText password;
     View view;
-    Button login, finishCreate, create, loginAttempt;
+    Button login, finishCreate, create;
     private OnFragmentInteractionListener mListener;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_home, container, false);
         login = view.findViewById(R.id.login);
         finishCreate = view.findViewById(R.id.createFinish);
         create = view.findViewById(R.id.create);
-        loginAttempt = view.findViewById(R.id.loginAttempt);
+
 
         text = view.findViewById(R.id.welcomeText);
+        text4 = view.findViewById(R.id.text4);
+        text5 = view.findViewById(R.id.text5);
         username = (EditText)view.findViewById(R.id.username);
         password = (EditText)view.findViewById(R.id.password);
 
 
         login.setOnClickListener(this);
         finishCreate.setOnClickListener(this);
-        loginAttempt.setOnClickListener(this);
         create.setOnClickListener(this);
-        //username.setOnClickListener(this);
-        //password.setOnClickListener(this);
+
+
 
         return view;
     }
@@ -61,7 +65,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-
 
     public String getUsername()
     {
@@ -118,10 +121,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         {
             mListener.onButtonClicked(2);
         }
-        else if (v.getId() == loginAttempt.getId())
-        {
-            mListener.onButtonClicked(3);
-        }
+
     }
 
     public void setScreen()
@@ -129,27 +129,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         username.setVisibility(view.VISIBLE);
         password.setVisibility(view.VISIBLE);
         finishCreate.setVisibility(view.VISIBLE);
+        text4.setVisibility(view.VISIBLE);
+        text5.setVisibility(view.VISIBLE);
         create.setVisibility(view.INVISIBLE);
         login.setVisibility(view.INVISIBLE);
+
     }
 
     public void resetScreen()
     {
-        username.setVisibility(view.VISIBLE);
-        password.setVisibility(view.VISIBLE);
-        username.setText("");
-        password.setText("");
-        create.setVisibility(View.INVISIBLE);
-        login.setVisibility(View.INVISIBLE);
-        loginAttempt.setVisibility(View.VISIBLE);
+        username.setVisibility(view.INVISIBLE);
+        password.setVisibility(view.INVISIBLE);
+        text4.setVisibility(view.INVISIBLE);
+        text5.setVisibility(view.INVISIBLE);
+        //username.setText("");
+        //password.setText("");
+        //create.setVisibility(View.INVISIBLE);
+        login.setVisibility(View.VISIBLE);
         finishCreate.setVisibility(View.INVISIBLE);
     }
 
+    public void loginSuccess(String s)
+    {
+
+        text.setText("Welcome Back: " + s + "!");
+    }
 
     public boolean validate(String u, String p)
     {
         return false;
     }
+
 
     public interface OnFragmentInteractionListener{
         void onButtonClicked(int infoID);

@@ -28,9 +28,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     private CalendarFragment.OnFragmentInteractionListener mListener;
     String desc, time = "";
     TextView textView;
-    ArrayList<Integer> days, months,hours, mins;
+    ArrayList<String> days, months,hours, mins;
     ArrayList<String> times;
-    ArrayAdapter<Integer> d, m, h, m2;
+    ArrayAdapter<String> d, m, h, m2;
     ArrayAdapter<String> t;
     Spinner spinDay, spinMonth, spinHour, spinMin, spinTime;
     int day, month, hour, min = -1;
@@ -62,31 +62,37 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         times = new ArrayList<>();
         times.add("AM");
         times.add("PM");
-        mins.add(0);
+        mins.add("00");
+        mins.add("05");
 
         for(int i = 1; i<61; i++){
-            if(i<= 12){
-                months.add(i);
-                hours.add(i);
+            if(i<10){
+                months.add("0" +i);
+                hours.add("0" +i);
+                days.add("0" +i);
             }
-            if(i<= 31) {
-                days.add(i);
+            if(i >= 10 &&i<= 12){
+                months.add(""+i);
+                hours.add(""+i);
             }
-            if(i%5 ==0) {
-                mins.add(i);
+            if(i >= 10 &&i<= 31) {
+                days.add(""+i);
+            }
+            if(i>= 9 && i%5 ==0) {
+                mins.add(""+i);
             }
         }
 
-        d = new ArrayAdapter<Integer>(this.getActivity(), android.R.layout.simple_spinner_item, days);
+        d = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, days);
         d.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinDay.setAdapter(d);
-        m = new ArrayAdapter<Integer>(this.getActivity(), android.R.layout.simple_spinner_item, months);
+        m = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, months);
         m.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinMonth.setAdapter(m);
-        h = new ArrayAdapter<Integer>(this.getActivity(), android.R.layout.simple_spinner_item, hours);
+        h = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, hours);
         h.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinHour.setAdapter(h);
-        m2 = new ArrayAdapter<Integer>(this.getActivity(), android.R.layout.simple_spinner_item, mins);
+        m2 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, mins);
         m2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinMin.setAdapter(m2);
         t = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, times);

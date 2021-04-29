@@ -195,13 +195,19 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                     Toast.makeText(MainActivity.this, "There is no app that can support this action", Toast.LENGTH_SHORT).show();
 
                 }*/
+                int year = Calendar.getInstance().get(Calendar.YEAR);;
 
-                int hour = -1;
-                if(calFrag.getTime() == "PM"){
-                    hour = calFrag.getHour()+12;
+                int hour = calFrag.getHour();
+                int day = calFrag.getDay();
+                if(calFrag.getTime().equals("PM") && calFrag.getHour() !=12){
+                    hour = hour+12;
+                }
+                else if(calFrag.getTime().equals("AM") && calFrag.getHour() == 12){
+                    hour = hour+12;
+                    day= day -1;
                 }
                 Calendar beginTime = Calendar.getInstance();
-                beginTime.set(2021, calFrag.getMonth()-1, calFrag.getDay(), hour, calFrag.getMin());
+                beginTime.set(year, calFrag.getMonth()-1, day, hour, calFrag.getMin());
                 //Calendar endTime = Calendar.getInstance();
                 //endTime.set(2021, 3, 28, 15, 30);
                 Intent intent = new Intent(Intent.ACTION_INSERT)

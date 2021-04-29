@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.ContentUris;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,11 +22,14 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, MusclesFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, MusclesFragment.OnFragmentInteractionListener, CalendarFragment.OnFragmentInteractionListener {
     HomeFragment frag;
+    CalendarFragment calFrag;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Map<String, String> user = new HashMap<>();
 
@@ -32,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         frag = new HomeFragment();
+        calFrag = new CalendarFragment();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                             selectedFragment = new MusclesFragment();
                             break;
                         case R.id.nav_calendar:
-                            selectedFragment = new CalendarFragment();
+                            selectedFragment = calFrag;
                             break;
                     }
 
@@ -162,5 +169,54 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
             i1.putExtra("muscle", 4);
             startActivity(i1);
         }
+    }
+
+    @Override
+    public void onButtonClickedCalendar(int infoID) {
+
+
+        if(infoID==0) {
+
+            if (calFrag.getDesc().equals("") || calFrag.getDay() == -1 || calFrag.getMonth() ==-1) {
+                Toast.makeText(MainActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                /*Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setData(CalendarContract.Events.CONTENT_URI);
+                intent.putExtra(CalendarContract.Events.TITLE, calFrag.getEvent());
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, calFrag.getDesc());
+                intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "McComas Hall");
+                intent.putExtra(CalendarContract.Events.ALL_DAY, true);
+
+                if(intent.resolveActivity(getPackageManager()) != null){
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "There is no app that can support this action", Toast.LENGTH_SHORT).show();
+
+                }*/
+
+                int hour = -1;
+                if(calFrag.getTime() == "PM"){
+                    hour = calFrag.getHour()+12;
+                }
+                Calendar beginTime = Calendar.getInstance();
+                beginTime.set(2021, calFrag.getMonth()-1, calFrag.getDay(), hour, calFrag.getMin());
+                //Calendar endTime = Calendar.getInstance();
+                //endTime.set(2021, 3, 28, 15, 30);
+                Intent intent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                        //.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                        .putExtra(CalendarContract.Events.TITLE, "Workout")
+                        .putExtra(CalendarContract.Events.DESCRIPTION, calFrag.getDesc())
+                        .putExtra(CalendarContract.Events.EVENT_LOCATION, "McComas Hall")
+                        .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
+                startActivity(intent);
+
+
+            }
+        }
+
     }
 }

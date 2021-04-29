@@ -23,14 +23,14 @@ import static java.lang.Integer.parseInt;
 
 public class CalendarFragment extends Fragment implements View.OnClickListener {
 
-    EditText  description;
+    Spinner  description;
     Button addEvent;
     private CalendarFragment.OnFragmentInteractionListener mListener;
     String desc, time = "";
     TextView textView;
-    ArrayList<String> days, months,hours, mins;
+    ArrayList<String> days, months,hours, mins, workouts;
     ArrayList<String> times;
-    ArrayAdapter<String> d, m, h, m2;
+    ArrayAdapter<String> d, m, h, m2, w;
     ArrayAdapter<String> t;
     Spinner spinDay, spinMonth, spinHour, spinMin, spinTime;
     int day, month, hour, min = -1;
@@ -44,7 +44,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         textView = (TextView) view.findViewById(R.id.tvTitle);
 
 
-        description = (EditText) view.findViewById(R.id.etDescription);
+        description = (Spinner) view.findViewById(R.id.spinnerDescription);
 
         addEvent = (Button) view.findViewById(R.id.buttonAdd);
         addEvent.setOnClickListener(this);
@@ -60,10 +60,27 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         hours = new ArrayList<>();
         mins = new ArrayList<>();
         times = new ArrayList<>();
+        workouts = new ArrayList<>();
         times.add("AM");
         times.add("PM");
         mins.add("00");
         mins.add("05");
+        workouts.add("Beginner-Abs");
+        workouts.add("Beginner-Arms");
+        workouts.add("Beginner-Back");
+        workouts.add("Beginner-Chest");
+        workouts.add("Beginner-Legs");
+        workouts.add("Intermediate-Abs");
+        workouts.add("Intermediate-Arms");
+        workouts.add("Intermediate-Back");
+        workouts.add("Intermediate-Chest");
+        workouts.add("Intermediate-Legs");
+        workouts.add("Advanced-Abs");
+        workouts.add("Advanced-Arms");
+        workouts.add("Advanced-Back");
+        workouts.add("Advanced-Chest");
+        workouts.add("Advanced-Legs");
+
 
         for(int i = 1; i<61; i++){
             if(i<10){
@@ -98,6 +115,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         t = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, times);
         t.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinTime.setAdapter(t);
+        w = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, workouts);
+        w.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        description.setAdapter(w);
 
 
         return view;
@@ -132,7 +152,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             day = -1;
             month = -1;
 
-            desc = description.getText().toString();
+            desc = description.getSelectedItem().toString();
             day = parseInt(spinDay.getSelectedItem().toString());
             month = parseInt(spinMonth.getSelectedItem().toString());
             time = spinTime.getSelectedItem().toString();

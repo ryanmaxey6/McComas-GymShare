@@ -74,6 +74,21 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                     return true;
                 }
             };
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1)
+        {
+            if (data != null)
+            {
+                String s = data.getStringExtra("User");
+                frag.loginSuccess(s);
+
+            }
+        }
+    }
 
     @Override
     public void onButtonClicked(int infoID) {

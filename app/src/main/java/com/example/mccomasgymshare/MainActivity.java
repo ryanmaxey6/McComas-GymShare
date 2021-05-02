@@ -30,8 +30,9 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, MusclesFragment.OnFragmentInteractionListener, CalendarFragment.OnFragmentInteractionListener {
     HomeFragment frag;
     CalendarFragment calFrag;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    static FirebaseFirestore db = FirebaseFirestore.getInstance();
     Map<String, String> user = new HashMap<>();
+    private boolean checker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

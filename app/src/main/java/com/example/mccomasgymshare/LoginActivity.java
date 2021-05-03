@@ -97,9 +97,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void newMain(String s)
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent();
         intent.putExtra("User", s);
-        setResult(RESULT_OK, getIntent());
+        setResult(RESULT_OK, intent);
         finish();
         //startActivity(intent);
     }

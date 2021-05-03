@@ -232,12 +232,12 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                 }
                 Calendar beginTime = Calendar.getInstance();
                 beginTime.set(year, calFrag.getMonth()-1, day, hour, calFrag.getMin());
-                //Calendar endTime = Calendar.getInstance();
-                //endTime.set(2021, 3, 28, 15, 30);
+                Calendar endTime = Calendar.getInstance();
+                endTime.set(year, calFrag.getMonth()-1, day, hour+1, calFrag.getMin());
                 Intent intent = new Intent(Intent.ACTION_INSERT)
                         .setData(CalendarContract.Events.CONTENT_URI)
                         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                        //.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
                         .putExtra(CalendarContract.Events.TITLE, "Workout")
                         .putExtra(CalendarContract.Events.DESCRIPTION, calFrag.getDesc())
                         .putExtra(CalendarContract.Events.EVENT_LOCATION, "McComas Hall")

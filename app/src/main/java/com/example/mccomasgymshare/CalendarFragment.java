@@ -2,6 +2,8 @@ package com.example.mccomasgymshare;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +43,11 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        textView = (TextView) view.findViewById(R.id.tvTitle);
+        textView = (TextView) view.findViewById(R.id.tvSchedule);
+        String temp = textView.getText().toString();
+        SpannableString content = new SpannableString(temp);
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
 
 
         description = (Spinner) view.findViewById(R.id.spinnerDescription);

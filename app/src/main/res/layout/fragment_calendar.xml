@@ -11,20 +11,23 @@
         android:id="@+id/tvSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Schedule Workout"
+        android:textColor="@color/chi_maroon"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Schedule Workout"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:ems="10"
         android:layout_marginTop="20dp"
+        android:ems="10"
         android:text="Workout"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSchedule" />
@@ -73,9 +76,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:ems="10"
         android:layout_marginTop="20dp"
+        android:ems="10"
         android:text="Month/Day"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerDescription" />
@@ -111,11 +115,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:ems="10"
         android:layout_marginTop="20dp"
+        android:ems="10"
         android:text="Workout Time"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDay"/>
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

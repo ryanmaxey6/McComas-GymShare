@@ -14,6 +14,7 @@
         android:gravity="center"
         android:padding="8dp"
         android:text="Bicycle Crunch"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
 
